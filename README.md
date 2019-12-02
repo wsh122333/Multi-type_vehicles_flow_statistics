@@ -17,7 +17,7 @@ Detecting and tracking the vehicles in \["bicycle","bus","car","motorbike","truc
 1. Download the pre-trained yolov3 weight file [here](https://pjreddie.com/media/files/yolov3.weights) and put it into `weights` directory;  
 2. Run `python3 app.py` ;
 3. Select video and double click the image to select area, and then start;
-4. After detecting and tracking, the result video and file are saved under `results` directory.
+4. After detecting and tracking, the result video and file are saved under `results` directory, the line of `results.txt` with format \[videoName,id,objectName] for each vehicle.
 
 ## Demo
 ![avatar](https://github.com/wsh122333/Multi-type_vehicles_flow_statistics/raw/master/asserts/demo1.gif)

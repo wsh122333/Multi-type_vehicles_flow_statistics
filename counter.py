@@ -121,27 +121,23 @@ class CounterThread(QThread):
                                item[1]])
         track_bbs_ids = mot_tracker.update(np.array(detections))
 
-        for i, item in enumerate(objects):
-            # x1,y1,x2,y2,id = list(map(lambda x :int(x),item))
-            # id_log.add(id)
-            # objectName = get_objName(item, objects)
-
-            objectName, province, objectBox = item
-            x, y, w, h = objectBox
-            x1, y1, x2, y2 = int(x - w / 2), int(y - h / 2), int(x + w / 2), int(y + h / 2)
-
-            boxColor = colorDict[objectName]
-            cv2.rectangle(frame, (x1, y1), (x2, y2), boxColor, thickness=2)
-            cv2.putText(frame, objectName, (x1 - 1, y1 - 3), cv2.FONT_HERSHEY_COMPLEX, 0.7, boxColor,
-                        thickness=2)
-
-
+        # for i, item in enumerate(objects):
+        #     # x1,y1,x2,y2,id = list(map(lambda x :int(x),item))
+        #     # id_log.add(id)
+        #     # objectName = get_objName(item, objects)
+        #
+        #     objectName, province, objectBox = item
+        #     x, y, w, h = objectBox
+        #     x1, y1, x2, y2 = int(x - w / 2), int(y - h / 2), int(x + w / 2), int(y + h / 2)
+        #
+        #     boxColor = colorDict[objectName]
+        #     cv2.rectangle(frame, (x1, y1), (x2, y2), boxColor, thickness=2)
+        #     cv2.putText(frame, objectName, (x1 - 1, y1 - 3), cv2.FONT_HERSHEY_COMPLEX, 0.7, boxColor,
+        #                 thickness=2)
 
         # painting area
         for i in range(len(CountArea)):
             cv2.line(frame, tuple(CountArea[i]), tuple(CountArea[(i + 1) % (len(CountArea))]), (0, 0, 255), 2)
-
-
 
         if len(track_bbs_ids) > 0:
             for bb in track_bbs_ids:    #add all bbox to history
@@ -155,6 +151,25 @@ class CounterThread(QThread):
                 else:
                     self.history[id]["no_update_count"] = 0
                     self.history[id]["his"].append(objectName)
+
+        for i, item in enumerate(track_bbs_ids):
+            bb = list(map(lambda x: int(x), item))
+            id = bb[-1]
+            x1, y1, x2, y2 = bb[:4]
+
+            his = self.history[id]["his"]
+            result = {}
+            for i in set(his):
+                result[i] = his.count(i)
+            res = sorted(result.items(), key=lambda d: d[1], reverse=True)
+            objectName = res[0][0]
+
+            boxColor = colorDict[objectName]
+            cv2.rectangle(frame, (x1, y1), (x2, y2), boxColor, thickness=2)
+            cv2.putText(frame, str(id) + "_" + objectName, (x1 - 1, y1 - 3), cv2.FONT_HERSHEY_COMPLEX, 0.7,
+                        boxColor,
+                        thickness=2)
+
 
         counter_results = []
         videoName = videoName.split('/')[-1]
@@ -178,7 +193,7 @@ class CounterThread(QThread):
         if len(counter_results):
             self.sin_counter_results.emit(counter_results)
 
-        print(self.history)
+        # print(self.history)
 
 
         return frame

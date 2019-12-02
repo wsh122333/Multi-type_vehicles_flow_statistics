@@ -13,9 +13,10 @@ According to YOLOv3 and SORT algorithms, counting multi-type vehicles. Implement
 - `pip3 install -r requirements.txt`
 
 ## Usage
-`python3 app.py`  
+1. Download the pre-trained yolov3 weight file [here](https://pjreddie.com/media/files/yolov3.weights) and put it into `weights` directory;  
+2. run `python3 app.py` ;
+3. Select video and double click the image to select area.
 
-Double click the image to select area.
 ## Demo
 ![avatar](https://github.com/wsh122333/Multi-type_vehicles_flow_statistics/raw/master/asserts/demo1.gif)
 

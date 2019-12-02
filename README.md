@@ -1,5 +1,6 @@
 # Multi-type_vehicles_flow_statistics
-According to YOLOv3 and SORT algorithms, counting multi-type vehicles. Implemented by Pytorch.
+According to YOLOv3 and SORT algorithms, counting multi-type vehicles. Implemented by Pytorch.  
+Detecting and tracking the vehicles in \["bicycle","bus","car","motorbike","truck"].
 
 ## Reference
 - yolov3-darknet  https://github.com/pjreddie/darknet

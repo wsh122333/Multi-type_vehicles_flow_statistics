@@ -1,0 +1,16 @@
+scikit_learn==0.21.3
+numpy
+matplotlib
+torch
+torchvision
+terminaltables
+pillow
+tqdm
+numba
+fire
+filterpy
+opencv-python
+scikit-image
+pytesseract
+PyQt5
+pandas

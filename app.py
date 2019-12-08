@@ -73,7 +73,7 @@ class App(QMainWindow,Ui_mainWindow):
         openfile_name = QFileDialog.getOpenFileName(self,'Open video','','Video files(*.avi , *.mp4)')
         self.videoList = [openfile_name[0]]
 
-        # opendir_name = QFileDialog.getExistingDirectory(self, "选取文件夹", "./")
+        # opendir_name = QFileDialog.getExistingDirectory(self, "Open dir", "./")
         # self.videoList = [os.path.join(opendir_name,item) for item in os.listdir(opendir_name)]
         # self.videoList = list(filter(lambda x: not os.path.isdir(x) , self.videoList))
         # self.videoList.sort()
